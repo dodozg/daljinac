@@ -9,11 +9,12 @@ permissions:
 
 jobs:
   test:
-    # The collector test reads real CPU, memory and disks, so it runs on all three systems.
+    # The collector test reads real CPU, memory and disks on each system.
+    # macOS is left out until the Mac phase (docs/odluke.md): its minutes cost 10x.
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

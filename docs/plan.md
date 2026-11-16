@@ -13,20 +13,20 @@ Stanje: **faza 1 u tijeku** (16. 11. 2026.).
 - [ ] Probni rad: kvaliteta RustDeska u odnosu na Splashtop, nadzor na jednom računalu (vlasnik)
 - [ ] VPS i poddomena (vlasnik)
 - [ ] Prvo pokretanje na VPS-u: Caddy, `daljinac-server`, `hbbs`/`hbbr`
-- [ ] Agent i službeni RustDesk klijent na 3 vlastita stroja (Windows, Mac, Linux)
+- [ ] Agent i službeni RustDesk klijent na 3 vlastita Windows stroja
 
 ## Faza 2 – Agent kao servis i instalacija (tjedan 3–4)
 
-- [ ] Agent kao Windows servis, macOS LaunchDaemon, Linux systemd jedinica
+- [ ] Agent kao Windows servis
 - [ ] Konfiguracijska datoteka agenta (adresa, token) umjesto varijabli okruženja
-- [ ] Instalacijski paketi: MSI (Windows), PKG (macOS), skripta (Linux)
+- [ ] Instalacijski paket: MSI
 - [ ] Skripte za GPO i Intune
 
 ## Faza 3 – Naš RustDesk klijent (tjedan 4–6)
 
 - [ ] Javni fork RustDeska: ime Daljinac, ugrađena adresa servera i ključ
-- [ ] Build u GitHub Actions za Windows, macOS i Linux
-- [ ] Potpis koda (Windows) i notarizacija (macOS)
+- [ ] Build u GitHub Actions za Windows
+- [ ] Potpis koda za Windows
 - [ ] Jedan instalacijski paket po firmi: RustDesk klijent + agent
 
 ## Faza 4 – Prijava i upravljanje (tjedan 6–10)
@@ -37,6 +37,8 @@ Stanje: **faza 1 u tijeku** (16. 11. 2026.).
 - [ ] Pilot kod prvog klijenta, zatim prelazak ostalih; Splashtop se gasi zadnji
 
 ## Kasnije
+
+- macOS i Linux: agent kao LaunchDaemon i systemd servis, PKG i skripta, RustDesk klijent, notarizacija za macOS
 
 - Upozorenja e-poštom, povijest i grafovi
 - Popis instaliranog softvera, skripte, zakrpe

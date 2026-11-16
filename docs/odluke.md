@@ -2,6 +2,14 @@
 
 Najnovije na vrhu. Svaka odluka: datum, što je odlučeno, zašto i što bi je promijenilo.
 
+## 2026-11-16 · Prvo samo Windows
+
+**Odluka:** probni rad, instalacija, servis, RustDesk klijent i potpis koda prvo radimo samo za Windows. macOS i Linux dolaze nakon što Windows radi kod prvog klijenta.
+
+**Zašto:** odluka vlasnika; jedna platforma skraćuje put do prve prave upotrebe.
+
+**Posljedice:** kod agenta i servera ostaje višeplatformski (to ništa ne košta), a CI i dalje gradi sve platforme. Testovi u CI-ju rade na Linuxu i Windowsu; test na macOS-u je isključen dok ne krene faza za Mac, jer su macOS minute na GitHubu deset puta skuplje.
+
 ## 2026-11-16 · Nadzor preko vlastitog malog agenta, ne preko RustDesk forka
 
 **Odluka:** CPU, RAM i diskove skuplja zaseban `daljinac-agent` (Go, biblioteka gopsutil), a ne izmjena RustDesk klijenta.

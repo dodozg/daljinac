@@ -37,7 +37,7 @@ go run ./cmd/daljinac-server -config server.json
 DALJINAC_TOKEN=... go run ./cmd/daljinac-agent -server http://127.0.0.1:8081 -once
 ```
 
-CI (`.github/workflows/ci.yml`) pokreće testove na Windowsu, macOS-u i Linuxu i gradi agenta za sve platforme.
+CI (`.github/workflows/ci.yml`) pokreće testove na Windowsu i Linuxu (macOS je isključen do faze za Mac) i gradi agenta i server za sve platforme. Prvo radimo samo Windows (`docs/odluke.md`).
 
 ## Pravila
 
