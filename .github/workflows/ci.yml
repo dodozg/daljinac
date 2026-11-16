@@ -55,8 +55,13 @@ jobs:
             GOOS="$os" GOARCH="$arch" go build -trimpath -ldflags "-s -w -X main.version=$v" \
               -o "dist/daljinac-agent-$os-$arch$ext" ./cmd/daljinac-agent
           done
-          GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w -X main.version=$v" \
-            -o dist/daljinac-server-linux-amd64 ./cmd/daljinac-server
+          # The server is built for every platform too, so it can be tried on a laptop.
+          for t in windows/amd64 darwin/arm64 darwin/amd64 linux/amd64; do
+            os="${t%/*}"; arch="${t#*/}"; ext=""
+            [ "$os" = windows ] && ext=".exe"
+            GOOS="$os" GOARCH="$arch" go build -trimpath -ldflags "-s -w -X main.version=$v" \
+              -o "dist/daljinac-server-$os-$arch$ext" ./cmd/daljinac-server
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: daljinac-${{ github.sha }}

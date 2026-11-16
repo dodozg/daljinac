@@ -9,6 +9,8 @@ Stanje: **faza 1 u tijeku** (16. 11. 2026.).
 - [x] `daljinac-agent`: CPU, RAM, diskovi za Windows, macOS i Linux
 - [x] CI: testovi na tri sustava, build agenta za sve platforme
 - [x] Docker Compose za RustDesk `hbbs`/`hbbr`
+- [x] Upute za probni rad bez servera (`docs/probni-rad.md`)
+- [ ] Probni rad: kvaliteta RustDeska u odnosu na Splashtop, nadzor na jednom računalu (vlasnik)
 - [ ] VPS i poddomena (vlasnik)
 - [ ] Prvo pokretanje na VPS-u: Caddy, `daljinac-server`, `hbbs`/`hbbr`
 - [ ] Agent i službeni RustDesk klijent na 3 vlastita stroja (Windows, Mac, Linux)

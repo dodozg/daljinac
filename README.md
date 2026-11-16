@@ -5,6 +5,8 @@ Interni alat za udaljeni pristup i nadzor računala kod klijenata.
 - **Udaljeni pristup:** RustDesk klijent s našim imenom i vlastitim serverima (`deploy/rustdesk/`).
 - **Nadzor:** `daljinac-agent` na svakom stroju svake minute javlja zauzeće CPU-a, RAM-a i diskova; `daljinac-server` ih prikazuje u konzoli, grupirano po firmi, žuto i crveno blizu granice.
 
+**Prvi put? Kreni od [probnog rada](docs/probni-rad.md).**
+
 Arhitektura: [docs/arhitektura.md](docs/arhitektura.md) · Odluke: [docs/odluke.md](docs/odluke.md) · Plan: [docs/plan.md](docs/plan.md)
 
 ## Brzi probni rad na jednom računalu
