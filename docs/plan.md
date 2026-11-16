@@ -1,13 +1,13 @@
 # Plan
 
-Stanje: **faza 1 u tijeku** (16. 11. 2026.).
+Stanje: **faza 1 u tijeku**, a uz nju je započeta faza 2 jer ne ovisi o probnom radu (16. 11. 2026.).
 
 ## Faza 1 – Temelj (tjedan 1–2)
 
 - [x] Repozitorij, odluke, arhitektura
 - [x] `daljinac-server`: prijem izvještaja, tokeni po firmi, konzola s pragovima
 - [x] `daljinac-agent`: CPU, RAM, diskovi za Windows, macOS i Linux
-- [x] CI: testovi na tri sustava, build agenta za sve platforme
+- [x] CI: testovi na Windowsu i Linuxu, build agenta za sve platforme
 - [x] Docker Compose za RustDesk `hbbs`/`hbbr`
 - [x] Upute za probni rad bez servera (`docs/probni-rad.md`)
 - [ ] Probni rad: kvaliteta RustDeska u odnosu na Splashtop, nadzor na jednom računalu (vlasnik)
@@ -17,8 +17,9 @@ Stanje: **faza 1 u tijeku** (16. 11. 2026.).
 
 ## Faza 2 – Agent kao servis i instalacija (tjedan 3–4)
 
-- [ ] Agent kao Windows servis
-- [ ] Konfiguracijska datoteka agenta (adresa, token) umjesto varijabli okruženja
+- [x] Agent kao Windows servis (`daljinac-agent -install`)
+- [x] Konfiguracijska datoteka agenta (adresa, token) umjesto varijabli okruženja
+- [ ] Proba servisa na stvarnom stroju: instalacija, restart, nadogradnja, uklanjanje (vlasnik)
 - [ ] Instalacijski paket: MSI
 - [ ] Skripte za GPO i Intune
 

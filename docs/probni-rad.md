@@ -62,6 +62,26 @@ Otvori http://127.0.0.1:8080 (stranica se sama osvježava svake minute).
 
 Nakon probe zatvori prozor servera i obriši `server.json`.
 
+## Proba 3: agent kao servis, oko 10 minuta
+
+Nastavak Probe 2, na istom računalu i s istim tokenom. Treba PowerShell otvoren **kao administrator**, u mapi s datotekama. Agenta iz Probe 2 zaustavi (Ctrl+C), a server neka radi.
+
+```powershell
+$env:DALJINAC_TOKEN = $token   # isti token kao u Probi 2
+.\daljinac-agent-windows-amd64.exe -install -server http://127.0.0.1:8081
+Remove-Item Env:DALJINAC_TOKEN
+```
+
+Što provjeriti:
+
+- [ ] U `services.msc` postoji „Daljinac Agent”, pokrenut, s automatskim pokretanjem.
+- [ ] Unutar minute stroj se javlja u konzoli.
+- [ ] Iz običnog (ne administratorskog) PowerShella `Get-Content C:\ProgramData\Daljinac\agent.json` javlja da pristup nije dozvoljen.
+- [ ] Nakon restarta računala (i ponovnog pokretanja servera) stroj se opet javlja, bez prijave korisnika.
+- [ ] Zaustavi server na nekoliko minuta: u Event Vieweru (Windows Logs → Application, izvor `DaljinacAgent`) je jedno upozorenje, a nakon ponovnog pokretanja servera poruka da izvještaji opet prolaze.
+- [ ] Ponovni `-install` bez tokena (nadogradnja) prolazi i zadržava stari token.
+- [ ] `.\daljinac-agent-windows-amd64.exe -uninstall` uklanja servis, `C:\ProgramData\Daljinac` i `C:\Program Files\Daljinac`.
+
 ## Nakon probe
 
-Javi rezultate obje probe. Ako je RustDesk dovoljno dobar, sljedeći korak je VPS i prvo pravo pokretanje (`docs/plan.md`, faza 1).
+Javi rezultate svih proba. Ako je RustDesk dovoljno dobar, sljedeći korak je VPS i prvo pravo pokretanje (`docs/plan.md`, faza 1).

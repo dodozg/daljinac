@@ -39,8 +39,20 @@ Otvori http://127.0.0.1:8080.
 
 ## Agent
 
+Instalacija kao Windows servis, u PowerShellu otvorenom kao administrator:
+
+```powershell
+$env:DALJINAC_TOKEN = '<token firme>'
+.\daljinac-agent-windows-amd64.exe -install -server https://remote.example.hr
+Remove-Item Env:DALJINAC_TOKEN
+```
+
+Program se kopira u `C:\Program Files\Daljinac`, a adresa i token u `C:\ProgramData\Daljinac\agent.json`, koju mogu čitati samo administratori. Nadogradnja je isti `-install` s novom verzijom (token se zadržava). Uklanjanje: `daljinac-agent -uninstall`. Detalji: [docs/arhitektura.md](docs/arhitektura.md#agent-na-windowsima).
+
+Za probu bez instalacije agent radi i u konzoli:
+
 ```bash
 DALJINAC_TOKEN=<token firme> daljinac-agent -server https://remote.example.hr
 ```
 
-Token se namjerno čita samo iz varijable okruženja, da se ne vidi u popisu procesa. Gotove izvršne datoteke za Windows, macOS i Linux gradi CI (artefakt uz svaki build).
+Token se nikad ne zadaje kao argument, da se ne vidi u popisu procesa. Gotove izvršne datoteke za Windows, macOS i Linux gradi CI (artefakt uz svaki build).

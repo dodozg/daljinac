@@ -2,6 +2,16 @@
 
 Najnovije na vrhu. Svaka odluka: datum, što je odlučeno, zašto i što bi je promijenilo.
 
+## 2026-11-16 · Agent kao Windows servis, token u zaštićenoj datoteci
+
+**Odluka:** `daljinac-agent -install` (kao administrator) kopira program u `C:\Program Files\Daljinac`, zapisuje adresu servera i token u `C:\ProgramData\Daljinac\agent.json` i registrira servis `DaljinacAgent` (automatsko pokretanje s odgodom, ponovno pokretanje nakon pada). Datoteci i mapi mogu pristupiti samo SYSTEM i administratori, a vlasnik je grupa Administrators. Servis piše u Event Viewer (Application, izvor `DaljinacAgent`). Pad veze bilježi se kad počne, najviše jednom na sat dok traje i kad prođe. Varijable `DALJINAC_TOKEN` i `-server` i dalje rade za probu u konzoli, ali ih servis ignorira.
+
+**Zašto:** agent mora raditi bez prijavljenog korisnika i preživjeti restart. Token ne smije biti čitljiv običnom korisniku (s njim bi mogao slati lažne izvještaje u ime firme), a ni vidljiv u popisu procesa. Zato se ne zadaje kao argument. Servis radi kao LocalSystem, kao i RustDesk.
+
+**Nova ovisnost:** `golang.org/x/sys` (Go tim, već je bio neizravna ovisnost preko gopsutila) za Windows servis, dnevnik događaja i ovlasti nad datotekama. U standardnoj biblioteci toga nema.
+
+**Promijenilo bi je:** MSI (sljedeći korak) preuzima kopiranje i registraciju servisa; `-install` ostaje za ručnu instalaciju i skripte.
+
 ## 2026-11-16 · Prvo samo Windows
 
 **Odluka:** probni rad, instalacija, servis, RustDesk klijent i potpis koda prvo radimo samo za Windows. macOS i Linux dolaze nakon što Windows radi kod prvog klijenta.

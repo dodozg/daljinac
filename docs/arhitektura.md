@@ -46,4 +46,15 @@ Mijenjaju se u `thresholds` u konfiguraciji servera.
 
 - **macOS:** sistemski i podatkovni APFS volumen dijele isti prostor; prikazujemo oba, pa postotak podatkovnog volumena može podcijeniti stvarnu popunjenost.
 - **CPU:** jedno mjerenje od 2 s po izvještaju, ne prosjek kroz minutu.
-- Agent se zasad pokreće ručno; instalacija kao servis dolazi u sljedećoj fazi.
+- Agent kao servis zasad postoji samo za Windows (`-install`); macOS i Linux dolaze u fazi za Mac.
+
+## Agent na Windowsima
+
+| | |
+| --- | --- |
+| Program | `C:\Program Files\Daljinac\daljinac-agent.exe` |
+| Konfiguracija | `C:\ProgramData\Daljinac\agent.json` (`server`, `token`); pristup samo SYSTEM i Administrators |
+| Servis | `DaljinacAgent`, LocalSystem, automatski s odgodom; nakon pada ponovno za 1, 1 pa 5 minuta |
+| Dnevnik | Event Viewer → Windows Logs → Application, izvor `DaljinacAgent` |
+
+Ponovni `-install` služi i za nadogradnju: zaustavlja servis, zamjenjuje program i zadržava postojeći token ako se ne zada novi.

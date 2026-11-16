@@ -47,6 +47,6 @@ CI (`.github/workflows/ci.yml`) pokreće testove na Windowsu i Linuxu (macOS je 
 - Svaka promjena dolazi s testovima; `go test -race ./...` mora prolaziti prije commita.
 - Sigurnost se ne slabi radi praktičnosti:
   - konzola sluša samo na loopback adresi dok nema prijavu s 2FA (provjera je u `Config.Validate`),
-  - agent šalje token samo preko HTTPS-a (osim na localhost) i čita ga samo iz varijable okruženja,
+  - agent šalje token samo preko HTTPS-a (osim na localhost) i čita ga iz datoteke dostupne samo SYSTEM-u i administratorima ili iz varijable okruženja, nikad iz argumenata naredbenog retka,
   - tokeni se uspoređuju u konstantnom vremenu, svaka firma ima svoj token i odvojene podatke.
 - Pravi tokeni, `server.json` i RustDesk ključevi nikad ne idu u repozitorij.
