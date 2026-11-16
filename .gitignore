@@ -1,0 +1,10 @@
+# Build output
+/bin/
+/dist/
+
+# Local configs hold real enrollment tokens - never commit them
+server.json
+*.local.json
+
+# RustDesk server key pair
+deploy/rustdesk/data/

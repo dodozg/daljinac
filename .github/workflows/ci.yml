@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # The collector test reads real CPU, memory and disks, so it runs on all three systems.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Vet
+        run: go vet ./...
+      - name: Test
+        run: go test -race -v ./...
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+
+  build:
+    needs: [test, format]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Build agent and server
+        env:
+          CGO_ENABLED: "0"
+        run: |
+          set -eu
+          v="${GITHUB_SHA::7}"
+          for t in windows/amd64 windows/arm64 darwin/amd64 darwin/arm64 linux/amd64 linux/arm64; do
+            os="${t%/*}"; arch="${t#*/}"; ext=""
+            [ "$os" = windows ] && ext=".exe"
+            GOOS="$os" GOARCH="$arch" go build -trimpath -ldflags "-s -w -X main.version=$v" \
+              -o "dist/daljinac-agent-$os-$arch$ext" ./cmd/daljinac-agent
+          done
+          GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w -X main.version=$v" \
+            -o dist/daljinac-server-linux-amd64 ./cmd/daljinac-server
+      - uses: actions/upload-artifact@v4
+        with:
+          name: daljinac-${{ github.sha }}
+          path: dist/
+          retention-days: 14

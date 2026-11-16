@@ -1,0 +1,11 @@
+# Caddy gives the agent endpoint automatic HTTPS. Only the two agent paths are
+# public; the console stays on 127.0.0.1:8080 and is reached through an SSH tunnel.
+remote.example.hr {
+	@agent path /api/v1/report /healthz
+	handle @agent {
+		reverse_proxy 127.0.0.1:8081
+	}
+	handle {
+		respond 404
+	}
+}

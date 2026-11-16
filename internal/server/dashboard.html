@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="60">
+<title>Daljinac – pregled strojeva</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #656d76; --line: #d0d7de;
+    --warn-bg: #fff8c5; --crit-bg: #ffebe9; --off-bg: #f0f0f0;
+    --warn-fg: #7d4e00; --crit-fg: #a40e26;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --line: #30363d;
+      --warn-bg: #3b2e00; --crit-bg: #4c1219; --off-bg: #21262d;
+      --warn-fg: #f2cc60; --crit-fg: #ffa198;
+    }
+  }
+  body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg);
+         font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 24px 0 8px; }
+  .muted { color: var(--muted); }
+  .wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 720px; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-weight: 600; color: var(--muted); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.warning { background: var(--warn-bg); color: var(--warn-fg); font-weight: 600; }
+  td.critical { background: var(--crit-bg); color: var(--crit-fg); font-weight: 600; }
+  tr.offline td { background: var(--off-bg); color: var(--muted); }
+  .badge { display: inline-block; padding: 0 6px; border-radius: 4px; font-size: 12px; }
+  .badge.problems { background: var(--crit-bg); color: var(--crit-fg); }
+</style>
+</head>
+<body>
+<h1>Daljinac – pregled strojeva</h1>
+<p class="muted">Osvježeno {{.Generated.Format "02.01.2006. 15:04:05"}}. Žuto od {{.Thresholds.CPU.Warn}} % CPU, {{.Thresholds.Mem.Warn}} % RAM-a ili {{.Thresholds.Disk.Warn}} % diska; crveno od {{.Thresholds.CPU.Crit}} / {{.Thresholds.Mem.Crit}} / {{.Thresholds.Disk.Crit}} %.</p>
+
+{{if not .Clients}}
+<p>Još nijedan stroj nije poslao izvještaj.</p>
+{{end}}
+
+{{range .Clients}}
+<h2>{{.Name}} <span class="muted">· {{machines (len .Devices)}}</span>
+  {{if .Problems}}<span class="badge problems">{{.Problems}} za provjeru</span>{{end}}</h2>
+<div class="wrap">
+<table>
+  <thead>
+    <tr><th>Stroj</th><th>Sustav</th><th>Stanje</th><th>CPU</th><th>RAM</th><th>Najpuniji disk</th><th>Zadnji izvještaj</th></tr>
+  </thead>
+  <tbody>
+  {{range .Devices}}
+    <tr class="{{if not .Online}}offline{{end}}">
+      <td>{{.Hostname}}</td>
+      <td title="{{.Platform}}">{{.OS}}</td>
+      <td>{{if .Online}}online{{else}}offline{{end}}</td>
+      <td class="num {{if .Online}}{{.Assessment.CPU}}{{end}}">{{pct .CPUPercent}}</td>
+      <td class="num {{if .Online}}{{.Assessment.Mem}}{{end}}">{{pct .MemPercent}} <span class="muted">od {{gb .MemTotalBytes}}</span></td>
+      {{$dev := .}}{{with .Disk}}
+      <td class="num {{if $dev.Online}}{{$dev.Assessment.Disk}}{{end}}">{{.Mount}} · {{pct .UsedPercent}} <span class="muted">od {{gb .TotalBytes}}</span></td>
+      {{else}}
+      <td class="muted">–</td>
+      {{end}}
+      <td>{{.LastSeen.Format "02.01. 15:04"}}</td>
+    </tr>
+  {{end}}
+  </tbody>
+</table>
+</div>
+{{end}}
+</body>
+</html>

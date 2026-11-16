@@ -1,0 +1,14 @@
+{
+  "agent_listen": "127.0.0.1:8081",
+  "console_listen": "127.0.0.1:8080",
+  "offline_after": "5m",
+  "thresholds": {
+    "cpu":  {"warn": 75, "crit": 90},
+    "mem":  {"warn": 85, "crit": 95},
+    "disk": {"warn": 85, "crit": 95}
+  },
+  "clients": [
+    {"name": "Firma A d.o.o.", "token": "ZAMIJENI: openssl rand -hex 32"},
+    {"name": "Firma B d.o.o.", "token": "ZAMIJENI: openssl rand -hex 32"}
+  ]
+}
