@@ -25,7 +25,8 @@ internal/server       HTTP handleri, spremište u memoriji, konzola (dashboard.h
 internal/agent        prikupljanje (gopsutil) i slanje
 deploy/rustdesk       Docker Compose za hbbs/hbbr
 deploy/server         primjer konfiguracije i Caddyfile
-docs/                 odluke, arhitektura, plan (na hrvatskom)
+docs/                 odluke, arhitektura, plan, probni rad (na hrvatskom)
+docs/planovi/         raniji planski dokumenti; povijest, ne trenutni plan
 ```
 
 ## Naredbe

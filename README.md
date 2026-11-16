@@ -7,7 +7,7 @@ Interni alat za udaljeni pristup i nadzor računala kod klijenata.
 
 **Prvi put? Kreni od [probnog rada](docs/probni-rad.md).**
 
-Arhitektura: [docs/arhitektura.md](docs/arhitektura.md) · Odluke: [docs/odluke.md](docs/odluke.md) · Plan: [docs/plan.md](docs/plan.md)
+Arhitektura: [docs/arhitektura.md](docs/arhitektura.md) · Odluke: [docs/odluke.md](docs/odluke.md) · Plan: [docs/plan.md](docs/plan.md) · Raniji planovi: [docs/planovi/](docs/planovi/)
 
 ## Brzi probni rad na jednom računalu
 
