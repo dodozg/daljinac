@@ -60,14 +60,17 @@ Otvori http://127.0.0.1:8080 (stranica se sama osvježava svake minute).
 - Zaustavi agenta (Ctrl+C) i pričekaj 5 minuta: prelazi li stroj u „offline"?
 - Što nedostaje ili smeta?
 
-Nakon probe zatvori prozor servera i obriši `server.json`.
+Server i `server.json` ostavi za Probu 3.
+
+**Ako se prozor servera odmah zatvori ili agent ne može poslati izvještaj**, port 8080 ili 8081 vjerojatno zauzima drugi program (na uredskom računalu to je bio iVMS-4200, Hikvisionov program za kamere). Tada u `server.json` zadaj druge portove, npr. `{"agent_listen":"127.0.0.1:18081","console_listen":"127.0.0.1:18080","clients":[...]}`, i svugdje u uputama umjesto 8081 i 8080 koristi 18081 i 18080.
 
 ## Proba 3: agent kao servis, oko 10 minuta
 
 Nastavak Probe 2, na istom računalu i s istim tokenom. Treba PowerShell otvoren **kao administrator**, u mapi s datotekama. Agenta iz Probe 2 zaustavi (Ctrl+C), a server neka radi.
 
 ```powershell
-$env:DALJINAC_TOKEN = $token   # isti token kao u Probi 2
+# Isti token kao u Probi 2, pročitan iz server.json (novi prozor ne zna $token)
+$env:DALJINAC_TOKEN = (Get-Content server.json | ConvertFrom-Json).clients[0].token
 .\daljinac-agent-windows-amd64.exe -install -server http://127.0.0.1:8081
 Remove-Item Env:DALJINAC_TOKEN
 ```
@@ -81,6 +84,8 @@ Remove-Item Env:DALJINAC_TOKEN
 - [ ] Zaustavi server na nekoliko minuta: u Event Vieweru (Windows Logs → Application, izvor `DaljinacAgent`) je jedno upozorenje, a nakon ponovnog pokretanja servera poruka da izvještaji opet prolaze.
 - [ ] Ponovni `-install` bez tokena (nadogradnja) prolazi i zadržava stari token.
 - [ ] `.\daljinac-agent-windows-amd64.exe -uninstall` uklanja servis, `C:\ProgramData\Daljinac` i `C:\Program Files\Daljinac`.
+
+Na kraju zatvori prozor servera i obriši `server.json`.
 
 ## Nakon probe
 

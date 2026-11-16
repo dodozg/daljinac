@@ -58,6 +58,8 @@ Najnovije na vrhu. Svaka odluka: datum, što je odlučeno, zašto i što bi je p
 
 **Posljedice:** izmijenjeni klijent koji instaliramo kod klijenata mora imati dostupan izvorni kod (AGPL), pa će fork biti javni repozitorij. Za Windows treba certifikat za potpis koda, za macOS Apple Developer račun.
 
+**Potvrđeno:** probom 1 (`docs/probni-rad.md`) vlasnik je 16. 11. 2026. ocijenio da kvaliteta RustDeska u odnosu na Splashtop zadovoljava.
+
 **Odbačeno:** reverse engineering Splashtopa (licenca i sigurnost), MeshCentral kao glavno rješenje (slabija slika od Splashtopa).
 
 ## 2026-11-16 · Ime projekta: Daljinac

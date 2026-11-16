@@ -10,7 +10,9 @@ Stanje: **faza 1 u tijeku**, a uz nju je započeta faza 2 jer ne ovisi o probnom
 - [x] CI: testovi na Windowsu i Linuxu, build agenta za sve platforme
 - [x] Docker Compose za RustDesk `hbbs`/`hbbr`
 - [x] Upute za probni rad bez servera (`docs/probni-rad.md`)
-- [ ] Probni rad: kvaliteta RustDeska u odnosu na Splashtop, nadzor na jednom računalu (vlasnik)
+- [x] Proba 1: kvaliteta RustDeska u odnosu na Splashtop zadovoljava (vlasnik, 16. 11. 2026.)
+- [x] Proba 2 i 3: nadzor i agent kao servis na jednom računalu (Claude na uredskom računalu, 16. 11. 2026.; sve točke prošle osim restarta računala)
+- [ ] Proba 3, restart računala: servis se javlja bez prijave korisnika (vlasnik)
 - [ ] VPS i poddomena (vlasnik)
 - [ ] Prvo pokretanje na VPS-u: Caddy, `daljinac-server`, `hbbs`/`hbbr`
 - [ ] Agent i službeni RustDesk klijent na 3 vlastita Windows stroja
@@ -19,7 +21,6 @@ Stanje: **faza 1 u tijeku**, a uz nju je započeta faza 2 jer ne ovisi o probnom
 
 - [x] Agent kao Windows servis (`daljinac-agent -install`)
 - [x] Konfiguracijska datoteka agenta (adresa, token) umjesto varijabli okruženja
-- [ ] Proba servisa na stvarnom stroju: instalacija, restart, nadogradnja, uklanjanje (vlasnik)
 - [ ] Instalacijski paket: MSI
 - [ ] Skripte za GPO i Intune
 
